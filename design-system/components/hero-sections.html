@@ -1,0 +1,139 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Sections — Slimming World Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', sans-serif; background: #fdfaf5; color: #1a1a1a; }
+  .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9e9e9e; border-bottom: 1px solid #e0e0e0; padding: 20px 40px 12px; }
+  .btn { display:inline-flex; align-items:center; gap:8px; font-family:'Nunito Sans',sans-serif; font-weight:700; cursor:pointer; border:2px solid transparent; border-radius:9999px; transition:all 200ms; text-decoration:none; }
+  .btn-lg { font-size:1.125rem; padding:14px 36px; }
+  .btn-md { font-size:1rem; padding:12px 28px; }
+  .btn-primary { background:#008a4e; border-color:#008a4e; color:#fff; box-shadow:0 4px 14px rgba(0,138,78,0.25); }
+  .btn-white { background:#fff; border-color:#fff; color:#008a4e; }
+  .btn-white-outline { background:transparent; border-color:#fff; color:#fff; }
+  .btn-accent { background:#e02626; border-color:#e02626; color:#fff; }
+
+  /* Hero 1 — Full width with gradient overlay */
+  .hero-main {
+    min-height: 560px;
+    background: linear-gradient(135deg, #003d22 0%, #008a4e 50%, #33a46e 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-main::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero-main .content { padding: 80px 60px; position:relative; z-index:1; }
+  .hero-main .eyebrow { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#66be93; margin-bottom:16px; }
+  .hero-main h1 { font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:700; line-height:1.15; color:#fff; margin-bottom:20px; }
+  .hero-main p { font-size:1.125rem; color:rgba(255,255,255,0.85); line-height:1.65; margin-bottom:32px; max-width:480px; }
+  .hero-main .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .hero-main .visual { height:100%; min-height:560px; background:linear-gradient(135deg,rgba(0,138,78,0.3),rgba(0,61,34,0.5)), url(); display:flex; align-items:center; justify-content:center; }
+  .hero-main .visual .placeholder { width:300px; height:400px; border-radius:24px; background:rgba(255,255,255,0.1); border:2px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; }
+  .stats-row { display:flex; gap:32px; margin-top:40px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.2); }
+  .stat .num { font-size:2rem; font-weight:800; color:#fff; line-height:1; }
+  .stat .label { font-size:0.8rem; color:rgba(255,255,255,0.7); margin-top:4px; }
+
+  /* Hero 2 — Centered minimal */
+  .hero-centered {
+    padding: 100px 40px;
+    text-align: center;
+    background: #fff;
+  }
+  .hero-centered .overline { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#008a4e; margin-bottom:16px; }
+  .hero-centered h2 { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; color:#1a1a1a; line-height:1.2; max-width:600px; margin: 0 auto 20px; }
+  .hero-centered p { font-size:1.125rem; color:#757575; line-height:1.65; max-width:520px; margin: 0 auto 36px; }
+  .hero-centered .btn-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+  /* Hero 3 — Warm cream split */
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+    background: #f7f0e6;
+  }
+  .hero-split .content { padding: 64px 60px; display:flex; flex-direction:column; justify-content:center; }
+  .hero-split .eyebrow { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#d4a96a; margin-bottom:12px; }
+  .hero-split h2 { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:#1a1a1a; line-height:1.2; margin-bottom:16px; }
+  .hero-split p { font-size:1rem; color:#757575; line-height:1.65; margin-bottom:28px; max-width:420px; }
+  .hero-split .visual { background:linear-gradient(135deg,#ddbf8b,#997b50); display:flex; align-items:center; justify-content:center; }
+
+  /* Banner strip */
+  .banner { background:#008a4e; color:#fff; padding:14px 40px; display:flex; align-items:center; justify-content:center; gap:16px; font-size:0.9rem; font-weight:600; }
+  .banner strong { font-weight:800; }
+  .banner .cta { background:#fff; color:#008a4e; padding:6px 16px; border-radius:9999px; font-weight:700; font-size:0.8rem; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div class="section-label">Promotional Banner</div>
+<div class="banner">
+  <strong>🎉 Join online from just £3.95/week</strong> — and get your first month free!
+  <span class="cta">Join today →</span>
+</div>
+
+<div class="section-label">Primary Hero — Green Brand</div>
+<div class="hero-main">
+  <div class="content">
+    <div class="eyebrow">Real food · Real results · Real support</div>
+    <h1>Lose weight your way, and love it</h1>
+    <p>With Slimming World, you'll never go hungry. Our Food Optimising plan lets you eat the foods you love — and still lose weight every week.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-white btn-lg">Join today</a>
+      <a href="#" class="btn btn-white-outline btn-lg">How it works</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="num">1M+</div><div class="label">UK members</div></div>
+      <div class="stat"><div class="num">54yrs</div><div class="label">Of experience</div></div>
+      <div class="stat"><div class="num">5,000+</div><div class="label">Groups weekly</div></div>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="placeholder">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    </div>
+  </div>
+</div>
+
+<div class="section-label">Centered Hero — Light Background</div>
+<div class="hero-centered">
+  <div class="overline">🌟 Over 1 million members across the UK</div>
+  <h2>Thousands of recipes to fill you up, not out</h2>
+  <p>Browse our ever-growing library of Slimming World recipes — all designed to be filling, flavourful, and family-friendly.</p>
+  <div class="btn-row">
+    <a href="#" class="btn btn-primary btn-lg">Browse recipes</a>
+    <a href="#" class="btn btn-lg" style="background:transparent;border-color:#e0e0e0;color:#444">View meal plans</a>
+  </div>
+</div>
+
+<div class="section-label">Split Hero — Warm Cream</div>
+<div class="hero-split">
+  <div class="content">
+    <div class="eyebrow">Success stories</div>
+    <h2>Real people. Incredible transformations.</h2>
+    <p>Read inspiring stories from Slimming World members who've changed their lives — one week at a time.</p>
+    <a href="#" class="btn btn-primary btn-md">Read their stories</a>
+  </div>
+  <div class="visual">
+    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  </div>
+</div>
+
+</body>
+</html>

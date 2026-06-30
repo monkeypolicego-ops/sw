@@ -1,0 +1,172 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badges & Alerts — Slimming World Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', sans-serif; background: #fdfaf5; color: #1a1a1a; padding: 40px; }
+  h1 { font-size: 1.75rem; font-weight: 700; color: #006e3d; margin-bottom: 8px; }
+  .subtitle { color: #757575; margin-bottom: 40px; }
+  .section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9e9e9e; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin: 32px 0 20px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 16px; }
+
+  /* Badges */
+  .badge { display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:9999px; letter-spacing:0.02em; }
+  .badge-green   { background:#e8f7f0; color:#006e3d; }
+  .badge-red     { background:#fdf0f0; color:#b81a1a; }
+  .badge-cream   { background:#f7f0e6; color:#7a6340; }
+  .badge-grey    { background:#f2f2f2; color:#5c5c5c; }
+  .badge-green-solid  { background:#008a4e; color:#fff; }
+  .badge-red-solid    { background:#e02626; color:#fff; }
+  .badge-dark    { background:#1a1a1a; color:#fff; }
+  .badge-outline { background:transparent; border:1.5px solid #008a4e; color:#008a4e; }
+  .badge-lg { font-size:0.875rem; padding:6px 14px; }
+  .badge-dot::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
+
+  /* Tags (recipe) */
+  .tag-group { display:flex; flex-wrap:wrap; gap:8px; }
+  .tag { display:inline-flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; padding:6px 14px; border-radius:9999px; cursor:pointer; transition:all 150ms; }
+  .tag-default { background:#fff; border:1.5px solid #e0e0e0; color:#444; }
+  .tag-default:hover { border-color:#008a4e; color:#008a4e; }
+  .tag-active { background:#e8f7f0; border:1.5px solid #008a4e; color:#008a4e; }
+
+  /* Alerts */
+  .alert { display:flex; gap:12px; padding:16px 20px; border-radius:12px; border-left:4px solid; margin-bottom:12px; }
+  .alert-success { background:#e8f7f0; border-color:#008a4e; }
+  .alert-warning { background:#fef8ec; border-color:#f5a623; }
+  .alert-error   { background:#fdf0f0; border-color:#e02626; }
+  .alert-info    { background:#e8f4fc; border-color:#0077b6; }
+  .alert-icon { flex-shrink:0; margin-top:1px; }
+  .alert-body .title { font-weight:700; font-size:0.9rem; margin-bottom:3px; }
+  .alert-body .msg { font-size:0.875rem; color:#5c5c5c; line-height:1.5; }
+  .alert-success .title { color:#005a32; }
+  .alert-warning .title { color:#7a5200; }
+  .alert-error   .title { color:#7a0f0f; }
+  .alert-info    .title { color:#005580; }
+  .alert-close { margin-left:auto; color:#9e9e9e; cursor:pointer; flex-shrink:0; }
+
+  /* Syn counter badge */
+  .syn-badge { display:inline-flex; flex-direction:column; align-items:center; justify-content:center; width:64px; height:64px; border-radius:50%; font-weight:800; }
+  .syn-free { background:#008a4e; color:#fff; }
+  .syn-free .num { font-size:1rem; line-height:1; }
+  .syn-free .label { font-size:0.55rem; text-transform:uppercase; letter-spacing:0.05em; opacity:0.85; }
+  .syn-count { background:#fdf0f0; border:2px solid #e02626; color:#e02626; }
+  .syn-count .num { font-size:1.25rem; line-height:1; }
+  .syn-count .label { font-size:0.55rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+  /* Toast */
+  .toast { display:flex; align-items:center; gap:12px; background:#1a1a1a; color:#fff; padding:14px 18px; border-radius:12px; max-width:380px; box-shadow:0 10px 40px rgba(0,0,0,0.2); }
+  .toast-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .toast-msg { font-size:0.875rem; font-weight:600; flex:1; }
+  .toast-action { font-size:0.8rem; font-weight:700; color:#66be93; cursor:pointer; white-space:nowrap; }
+</style>
+</head>
+<body>
+<h1>Badges, Tags & Alerts</h1>
+<p class="subtitle">Status indicators, recipe tags, notifications, and syn badges for the Slimming World design system.</p>
+
+<div class="section-title">Badges</div>
+<div class="row">
+  <span class="badge badge-green">Free Food</span>
+  <span class="badge badge-red">1.5 Syns</span>
+  <span class="badge badge-cream">Healthy Extra</span>
+  <span class="badge badge-grey">Vegetarian</span>
+  <span class="badge badge-green-solid">Syn Free</span>
+  <span class="badge badge-red-solid">Speed Food</span>
+  <span class="badge badge-dark">New</span>
+  <span class="badge badge-outline">Online group</span>
+</div>
+<div class="row">
+  <span class="badge badge-green badge-dot">Members only</span>
+  <span class="badge badge-red badge-dot">Limited places</span>
+  <span class="badge badge-grey badge-dot">Fully booked</span>
+</div>
+<div class="row">
+  <span class="badge badge-green-solid badge-lg">✓ Target reached</span>
+  <span class="badge badge-red badge-lg">⭐ Editor's pick</span>
+</div>
+
+<div class="section-title">Recipe Filter Tags</div>
+<div class="tag-group">
+  <div class="tag tag-active">All</div>
+  <div class="tag tag-active">Syn Free</div>
+  <div class="tag tag-default">Under 5 Syns</div>
+  <div class="tag tag-default">Vegetarian</div>
+  <div class="tag tag-default">Vegan</div>
+  <div class="tag tag-default">Quick (under 30 min)</div>
+  <div class="tag tag-default">Batch cook</div>
+  <div class="tag tag-default">Family friendly</div>
+  <div class="tag tag-default">Slow cooker</div>
+</div>
+
+<div class="section-title">Syn Badges</div>
+<div class="row" style="gap:16px; align-items:flex-end">
+  <div>
+    <div class="syn-badge syn-free"><div class="num">FREE</div><div class="label">Food</div></div>
+  </div>
+  <div>
+    <div class="syn-badge syn-count"><div class="num">1½</div><div class="label">Syns</div></div>
+  </div>
+  <div>
+    <div class="syn-badge syn-count" style="width:72px;height:72px"><div class="num" style="font-size:1.5rem">5</div><div class="label">Syns</div></div>
+  </div>
+  <div>
+    <div class="syn-badge" style="background:#f7f0e6;color:#7a6340;border:2px solid #ddbf8b;width:72px;height:72px"><div class="num" style="font-size:0.8rem">Healthy</div><div class="label">Extra</div></div>
+  </div>
+</div>
+
+<div class="section-title">Alerts</div>
+<div style="max-width:600px">
+  <div class="alert alert-success">
+    <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#008a4e" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <div class="alert-body">
+      <div class="title">Target reached!</div>
+      <div class="msg">Congratulations — you've reached your target weight. Your consultant will celebrate with you at next week's group.</div>
+    </div>
+    <svg class="alert-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </div>
+
+  <div class="alert alert-info">
+    <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div class="alert-body">
+      <div class="title">Group moved this week</div>
+      <div class="msg">Your Tuesday 9:30am group is moving to the Leisure Centre on 15 July. <a href="#" style="color:#005580;font-weight:600">View details →</a></div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning">
+    <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <div class="alert-body">
+      <div class="title">Only 2 places left</div>
+      <div class="msg">The Wednesday 7pm group in Chorlton is almost full. Book your place now to avoid missing out.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-error">
+    <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e02626" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    <div class="alert-body">
+      <div class="title">Payment failed</div>
+      <div class="msg">We couldn't process your membership renewal. Please update your payment details to continue your journey.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Toast Notifications</div>
+<div style="display:flex;flex-direction:column;gap:10px;">
+  <div class="toast">
+    <div class="toast-icon" style="background:#008a4e"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span class="toast-msg">Recipe saved to your favourites</span>
+    <span class="toast-action">View</span>
+  </div>
+  <div class="toast">
+    <div class="toast-icon" style="background:#f5a623"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
+    <span class="toast-msg">Group session starts in 30 minutes</span>
+    <span class="toast-action">Dismiss</span>
+  </div>
+</div>
+</body>
+</html>

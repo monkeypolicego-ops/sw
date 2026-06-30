@@ -1,0 +1,84 @@
+/* Slimming World Design System — Color Tokens */
+:root {
+  /* Brand Green (primary) */
+  --color-green-900: #003d22;
+  --color-green-800: #005a32;
+  --color-green-700: #006e3d;
+  --color-green-600: #007a44;
+  --color-green-500: #008a4e; /* Primary brand green */
+  --color-green-400: #33a46e;
+  --color-green-300: #66be93;
+  --color-green-200: #99d8b8;
+  --color-green-100: #ccecdb;
+  --color-green-50:  #e8f7f0;
+
+  /* Brand Red / Coral (accent) */
+  --color-red-900: #7a0f0f;
+  --color-red-800: #991414;
+  --color-red-700: #b81a1a;
+  --color-red-600: #cc2020;
+  --color-red-500: #e02626; /* Primary accent red */
+  --color-red-400: #e85555;
+  --color-red-300: #f08080;
+  --color-red-200: #f7aaaa;
+  --color-red-100: #fbd4d4;
+  --color-red-50:  #fdf0f0;
+
+  /* Warm Neutrals */
+  --color-cream-900: #5c4b30;
+  --color-cream-800: #7a6340;
+  --color-cream-700: #997b50;
+  --color-cream-600: #b89360;
+  --color-cream-500: #d4a96a;
+  --color-cream-400: #ddbf8b;
+  --color-cream-300: #e6d0ac;
+  --color-cream-200: #f0e3ce;
+  --color-cream-100: #f7f0e6;
+  --color-cream-50:  #fdfaf5;
+
+  /* Neutrals / Greys */
+  --color-grey-900: #1a1a1a;
+  --color-grey-800: #2e2e2e;
+  --color-grey-700: #444444;
+  --color-grey-600: #5c5c5c;
+  --color-grey-500: #757575;
+  --color-grey-400: #9e9e9e;
+  --color-grey-300: #bdbdbd;
+  --color-grey-200: #e0e0e0;
+  --color-grey-100: #f2f2f2;
+  --color-grey-50:  #fafafa;
+
+  /* Semantic Aliases */
+  --color-primary:           var(--color-green-500);
+  --color-primary-dark:      var(--color-green-700);
+  --color-primary-light:     var(--color-green-100);
+  --color-accent:            var(--color-red-500);
+  --color-accent-dark:       var(--color-red-700);
+  --color-accent-light:      var(--color-red-100);
+
+  --color-bg-page:           #ffffff;
+  --color-bg-subtle:         var(--color-cream-50);
+  --color-bg-muted:          var(--color-cream-100);
+  --color-bg-highlight:      var(--color-green-50);
+
+  --color-text-primary:      var(--color-grey-900);
+  --color-text-secondary:    var(--color-grey-600);
+  --color-text-disabled:     var(--color-grey-400);
+  --color-text-inverse:      #ffffff;
+  --color-text-brand:        var(--color-green-700);
+  --color-text-accent:       var(--color-red-600);
+
+  --color-border-default:    var(--color-grey-200);
+  --color-border-strong:     var(--color-grey-400);
+  --color-border-brand:      var(--color-green-400);
+  --color-border-accent:     var(--color-red-300);
+
+  --color-success:           var(--color-green-500);
+  --color-success-bg:        var(--color-green-50);
+  --color-warning:           #f5a623;
+  --color-warning-bg:        #fef8ec;
+  --color-error:             var(--color-red-500);
+  --color-error-bg:          var(--color-red-50);
+  --color-info:              #0077b6;
+  --color-info-bg:           #e8f4fc;
+}

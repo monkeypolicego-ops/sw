@@ -1,0 +1,66 @@
+/* Slimming World Design System — Typography Tokens */
+:root {
+  /* Font Families */
+  --font-family-heading: 'Playfair Display', 'Georgia', serif;
+  --font-family-body:    'Nunito Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono:    'Courier New', Courier, monospace;
+
+  /* Font Sizes (modular scale 1.25) */
+  --font-size-2xs:  0.64rem;   /*  ~10px */
+  --font-size-xs:   0.75rem;   /*  12px  */
+  --font-size-sm:   0.875rem;  /*  14px  */
+  --font-size-md:   1rem;      /*  16px  — base */
+  --font-size-lg:   1.125rem;  /*  18px  */
+  --font-size-xl:   1.25rem;   /*  20px  */
+  --font-size-2xl:  1.5rem;    /*  24px  */
+  --font-size-3xl:  1.875rem;  /*  30px  */
+  --font-size-4xl:  2.25rem;   /*  36px  */
+  --font-size-5xl:  3rem;      /*  48px  */
+  --font-size-6xl:  3.75rem;   /*  60px  */
+
+  /* Font Weights */
+  --font-weight-regular:    400;
+  --font-weight-medium:     500;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+  --font-weight-extrabold:  800;
+
+  /* Line Heights */
+  --line-height-tight:    1.2;
+  --line-height-snug:     1.35;
+  --line-height-normal:   1.5;
+  --line-height-relaxed:  1.65;
+  --line-height-loose:    1.8;
+
+  /* Letter Spacing */
+  --letter-spacing-tight:   -0.025em;
+  --letter-spacing-normal:   0em;
+  --letter-spacing-wide:     0.025em;
+  --letter-spacing-wider:    0.05em;
+  --letter-spacing-widest:   0.1em;
+
+  /* Heading Scale Presets */
+  --heading-1-size:    var(--font-size-5xl);
+  --heading-1-weight:  var(--font-weight-bold);
+  --heading-1-lh:      var(--line-height-tight);
+
+  --heading-2-size:    var(--font-size-4xl);
+  --heading-2-weight:  var(--font-weight-bold);
+  --heading-2-lh:      var(--line-height-tight);
+
+  --heading-3-size:    var(--font-size-3xl);
+  --heading-3-weight:  var(--font-weight-semibold);
+  --heading-3-lh:      var(--line-height-snug);
+
+  --heading-4-size:    var(--font-size-2xl);
+  --heading-4-weight:  var(--font-weight-semibold);
+  --heading-4-lh:      var(--line-height-snug);
+
+  --heading-5-size:    var(--font-size-xl);
+  --heading-5-weight:  var(--font-weight-semibold);
+  --heading-5-lh:      var(--line-height-normal);
+
+  --heading-6-size:    var(--font-size-lg);
+  --heading-6-weight:  var(--font-weight-semibold);
+  --heading-6-lh:      var(--line-height-normal);
+}

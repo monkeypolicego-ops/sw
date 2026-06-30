@@ -1,0 +1,83 @@
+<!-- @dsCard group="Foundations" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colors — Slimming World Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', sans-serif; background: #fdfaf5; color: #1a1a1a; padding: 40px; }
+  h1 { font-size: 2rem; font-weight: 700; color: #006e3d; margin-bottom: 8px; }
+  h2 { font-size: 1rem; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.08em; margin: 32px 0 12px; }
+  .subtitle { color: #757575; margin-bottom: 32px; }
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-bottom: 8px; }
+  .swatch { border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .swatch-color { height: 64px; }
+  .swatch-label { padding: 8px; background: white; }
+  .swatch-name { font-size: 0.75rem; font-weight: 600; color: #444; }
+  .swatch-hex  { font-size: 0.7rem; color: #757575; font-family: monospace; }
+  .semantic { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .sem-row { display: flex; align-items: center; gap: 12px; background: white; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .sem-dot { width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
+  .sem-info .name { font-size: 0.8rem; font-weight: 600; color: #444; }
+  .sem-info .value { font-size: 0.72rem; color: #757575; font-family: monospace; }
+</style>
+</head>
+<body>
+<h1>Color Palette</h1>
+<p class="subtitle">Brand colors, semantic aliases, and state colors for the Slimming World design system.</p>
+
+<h2>Brand Green</h2>
+<div class="palette">
+  <div class="swatch"><div class="swatch-color" style="background:#003d22"></div><div class="swatch-label"><div class="swatch-name">Green 900</div><div class="swatch-hex">#003d22</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#005a32"></div><div class="swatch-label"><div class="swatch-name">Green 800</div><div class="swatch-hex">#005a32</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#006e3d"></div><div class="swatch-label"><div class="swatch-name">Green 700</div><div class="swatch-hex">#006e3d</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#007a44"></div><div class="swatch-label"><div class="swatch-name">Green 600</div><div class="swatch-hex">#007a44</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#008a4e"></div><div class="swatch-label"><div class="swatch-name">Green 500 ★</div><div class="swatch-hex">#008a4e</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#33a46e"></div><div class="swatch-label"><div class="swatch-name">Green 400</div><div class="swatch-hex">#33a46e</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#66be93"></div><div class="swatch-label"><div class="swatch-name">Green 300</div><div class="swatch-hex">#66be93</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#99d8b8"></div><div class="swatch-label"><div class="swatch-name">Green 200</div><div class="swatch-hex">#99d8b8</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#ccecdb"></div><div class="swatch-label"><div class="swatch-name">Green 100</div><div class="swatch-hex">#ccecdb</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#e8f7f0; border:1px solid #e0e0e0;"></div><div class="swatch-label"><div class="swatch-name">Green 50</div><div class="swatch-hex">#e8f7f0</div></div></div>
+</div>
+
+<h2>Brand Red / Coral</h2>
+<div class="palette">
+  <div class="swatch"><div class="swatch-color" style="background:#7a0f0f"></div><div class="swatch-label"><div class="swatch-name">Red 900</div><div class="swatch-hex">#7a0f0f</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#991414"></div><div class="swatch-label"><div class="swatch-name">Red 800</div><div class="swatch-hex">#991414</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#b81a1a"></div><div class="swatch-label"><div class="swatch-name">Red 700</div><div class="swatch-hex">#b81a1a</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#cc2020"></div><div class="swatch-label"><div class="swatch-name">Red 600</div><div class="swatch-hex">#cc2020</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#e02626"></div><div class="swatch-label"><div class="swatch-name">Red 500 ★</div><div class="swatch-hex">#e02626</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#e85555"></div><div class="swatch-label"><div class="swatch-name">Red 400</div><div class="swatch-hex">#e85555</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f08080"></div><div class="swatch-label"><div class="swatch-name">Red 300</div><div class="swatch-hex">#f08080</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f7aaaa"></div><div class="swatch-label"><div class="swatch-name">Red 200</div><div class="swatch-hex">#f7aaaa</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#fbd4d4"></div><div class="swatch-label"><div class="swatch-name">Red 100</div><div class="swatch-hex">#fbd4d4</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#fdf0f0; border:1px solid #e0e0e0;"></div><div class="swatch-label"><div class="swatch-name">Red 50</div><div class="swatch-hex">#fdf0f0</div></div></div>
+</div>
+
+<h2>Warm Cream</h2>
+<div class="palette">
+  <div class="swatch"><div class="swatch-color" style="background:#d4a96a"></div><div class="swatch-label"><div class="swatch-name">Cream 500</div><div class="swatch-hex">#d4a96a</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#ddbf8b"></div><div class="swatch-label"><div class="swatch-name">Cream 400</div><div class="swatch-hex">#ddbf8b</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#e6d0ac"></div><div class="swatch-label"><div class="swatch-name">Cream 300</div><div class="swatch-hex">#e6d0ac</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f0e3ce"></div><div class="swatch-label"><div class="swatch-name">Cream 200</div><div class="swatch-hex">#f0e3ce</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#f7f0e6; border:1px solid #e0e0e0;"></div><div class="swatch-label"><div class="swatch-name">Cream 100</div><div class="swatch-hex">#f7f0e6</div></div></div>
+  <div class="swatch"><div class="swatch-color" style="background:#fdfaf5; border:1px solid #e0e0e0;"></div><div class="swatch-label"><div class="swatch-name">Cream 50</div><div class="swatch-hex">#fdfaf5</div></div></div>
+</div>
+
+<h2>Semantic Colors</h2>
+<div class="semantic">
+  <div class="sem-row"><div class="sem-dot" style="background:#008a4e"></div><div class="sem-info"><div class="name">Primary</div><div class="value">--color-primary</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#006e3d"></div><div class="sem-info"><div class="name">Primary Dark</div><div class="value">--color-primary-dark</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#ccecdb; border:1px solid #e0e0e0"></div><div class="sem-info"><div class="name">Primary Light</div><div class="value">--color-primary-light</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#e02626"></div><div class="sem-info"><div class="name">Accent</div><div class="value">--color-accent</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#008a4e"></div><div class="sem-info"><div class="name">Success</div><div class="value">--color-success</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#f5a623"></div><div class="sem-info"><div class="name">Warning</div><div class="value">--color-warning</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#e02626"></div><div class="sem-info"><div class="name">Error</div><div class="value">--color-error</div></div></div>
+  <div class="sem-row"><div class="sem-dot" style="background:#0077b6"></div><div class="sem-info"><div class="name">Info</div><div class="value">--color-info</div></div></div>
+</div>
+</body>
+</html>

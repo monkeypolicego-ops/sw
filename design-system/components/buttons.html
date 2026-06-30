@@ -1,0 +1,142 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buttons — Slimming World Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', sans-serif; background: #fdfaf5; color: #1a1a1a; padding: 40px; }
+  h1 { font-size: 1.75rem; font-weight: 700; color: #006e3d; margin-bottom: 8px; }
+  .subtitle { color: #757575; margin-bottom: 40px; }
+  .section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9e9e9e; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin: 32px 0 20px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+
+  /* Base button */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: 'Nunito Sans', sans-serif; font-weight: 700; cursor: pointer;
+    border: 2px solid transparent; border-radius: 9999px;
+    transition: all 200ms cubic-bezier(0.4,0,0.2,1);
+    text-decoration: none; white-space: nowrap;
+  }
+
+  /* Sizes */
+  .btn-xs  { font-size: 0.75rem;  padding: 6px 14px; }
+  .btn-sm  { font-size: 0.875rem; padding: 8px 20px; }
+  .btn-md  { font-size: 1rem;     padding: 12px 28px; }
+  .btn-lg  { font-size: 1.125rem; padding: 14px 36px; }
+  .btn-xl  { font-size: 1.25rem;  padding: 16px 44px; }
+
+  /* Primary */
+  .btn-primary { background:#008a4e; border-color:#008a4e; color:#fff; box-shadow:0 4px 14px rgba(0,138,78,0.25); }
+  .btn-primary:hover { background:#006e3d; border-color:#006e3d; transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,138,78,0.35); }
+  .btn-primary:active { transform:translateY(0); box-shadow:0 2px 8px rgba(0,138,78,0.2); }
+
+  /* Secondary (outline) */
+  .btn-secondary { background:transparent; border-color:#008a4e; color:#008a4e; }
+  .btn-secondary:hover { background:#e8f7f0; }
+
+  /* Accent / CTA */
+  .btn-accent { background:#e02626; border-color:#e02626; color:#fff; box-shadow:0 4px 14px rgba(224,38,38,0.2); }
+  .btn-accent:hover { background:#b81a1a; border-color:#b81a1a; transform:translateY(-1px); box-shadow:0 6px 20px rgba(224,38,38,0.3); }
+
+  /* Ghost */
+  .btn-ghost { background:transparent; border-color:transparent; color:#008a4e; }
+  .btn-ghost:hover { background:#e8f7f0; border-color:#e8f7f0; }
+
+  /* White (for dark backgrounds) */
+  .btn-white { background:#fff; border-color:#fff; color:#008a4e; font-weight:700; }
+  .btn-white:hover { background:#f2f2f2; }
+
+  /* White Outline */
+  .btn-white-outline { background:transparent; border-color:#fff; color:#fff; }
+  .btn-white-outline:hover { background:rgba(255,255,255,0.1); }
+
+  /* Disabled */
+  .btn-disabled { background:#e0e0e0; border-color:#e0e0e0; color:#9e9e9e; cursor:not-allowed; }
+
+  /* Icon only */
+  .btn-icon { padding:10px; border-radius:50%; }
+
+  /* Dark bg showcase */
+  .dark-bg { background:#006e3d; border-radius:16px; padding:24px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+
+  .tag { font-size:0.7rem; color:#9e9e9e; margin-top:4px; }
+</style>
+</head>
+<body>
+<h1>Buttons</h1>
+<p class="subtitle">All button variants, sizes, and states for the Slimming World design system.</p>
+
+<div class="section-title">Variants</div>
+<div class="row">
+  <div>
+    <button class="btn btn-primary btn-md">Join today</button>
+    <div class="tag">Primary</div>
+  </div>
+  <div>
+    <button class="btn btn-secondary btn-md">Find a group</button>
+    <div class="tag">Secondary / Outline</div>
+  </div>
+  <div>
+    <button class="btn btn-accent btn-md">Start now</button>
+    <div class="tag">Accent / CTA</div>
+  </div>
+  <div>
+    <button class="btn btn-ghost btn-md">Learn more</button>
+    <div class="tag">Ghost</div>
+  </div>
+  <div>
+    <button class="btn btn-disabled btn-md" disabled>Unavailable</button>
+    <div class="tag">Disabled</div>
+  </div>
+</div>
+
+<div class="section-title">Sizes</div>
+<div class="row" style="align-items:flex-end">
+  <div><button class="btn btn-primary btn-xs">Join</button><div class="tag">XS</div></div>
+  <div><button class="btn btn-primary btn-sm">Join today</button><div class="tag">SM</div></div>
+  <div><button class="btn btn-primary btn-md">Join today</button><div class="tag">MD</div></div>
+  <div><button class="btn btn-primary btn-lg">Join Slimming World</button><div class="tag">LG</div></div>
+  <div><button class="btn btn-primary btn-xl">Join Slimming World today</button><div class="tag">XL</div></div>
+</div>
+
+<div class="section-title">With Icons</div>
+<div class="row">
+  <button class="btn btn-primary btn-md">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Download recipe
+  </button>
+  <button class="btn btn-secondary btn-md">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Search recipes
+  </button>
+  <button class="btn btn-accent btn-md">
+    Get started
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
+  <button class="btn btn-ghost btn-icon" title="Favourite">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#008a4e" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+  </button>
+</div>
+
+<div class="section-title">On Dark Background</div>
+<div class="dark-bg">
+  <div>
+    <button class="btn btn-white btn-md">Join today</button>
+    <div class="tag" style="color:rgba(255,255,255,0.5)">White</div>
+  </div>
+  <div>
+    <button class="btn btn-white-outline btn-md">Find out more</button>
+    <div class="tag" style="color:rgba(255,255,255,0.5)">White Outline</div>
+  </div>
+  <div>
+    <button class="btn btn-accent btn-md">Start for free</button>
+    <div class="tag" style="color:rgba(255,255,255,0.5)">Accent</div>
+  </div>
+</div>
+</body>
+</html>

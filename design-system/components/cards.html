@@ -1,0 +1,191 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cards — Slimming World Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', sans-serif; background: #fdfaf5; color: #1a1a1a; padding: 40px; }
+  h1 { font-size: 1.75rem; font-weight: 700; color: #006e3d; margin-bottom: 8px; }
+  .subtitle { color: #757575; margin-bottom: 40px; }
+  .section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9e9e9e; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin: 32px 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; }
+
+  /* Recipe Card */
+  .recipe-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.10); transition: all 250ms cubic-bezier(0.4,0,0.2,1); cursor:pointer; }
+  .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.10), 0 8px 10px -6px rgba(0,0,0,0.10); }
+  .recipe-card .img { height: 200px; background: linear-gradient(135deg, #66be93 0%, #008a4e 100%); position:relative; display:flex; align-items:center; justify-content:center; }
+  .recipe-card .img svg { opacity:0.3; }
+  .recipe-card .badge { position:absolute; top:12px; left:12px; background:#008a4e; color:#fff; font-size:0.7rem; font-weight:700; padding:4px 10px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em; }
+  .recipe-card .fav { position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.9); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; }
+  .recipe-card .body { padding: 20px; }
+  .recipe-card .tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #008a4e; margin-bottom: 6px; }
+  .recipe-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+  .recipe-card .desc { font-size: 0.875rem; color: #757575; line-height: 1.6; margin-bottom: 16px; }
+  .recipe-card .meta { display:flex; gap:16px; font-size:0.8rem; color:#9e9e9e; }
+  .recipe-card .meta span { display:flex; align-items:center; gap:4px; }
+
+  /* Success Story Card */
+  .story-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.10); display:flex; gap:0; }
+  .story-card .avatar { width: 120px; flex-shrink:0; background: linear-gradient(135deg, #d4a96a 0%, #997b50 100%); display:flex; align-items:center; justify-content:center; }
+  .story-card .avatar svg { opacity:0.4; }
+  .story-card .body { padding: 24px; }
+  .story-card .name { font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; }
+  .story-card .loss { font-size: 1.5rem; font-weight: 800; color: #008a4e; margin-bottom: 8px; }
+  .story-card .quote { font-size: 0.875rem; color: #757575; line-height: 1.6; font-style: italic; }
+  .story-card .quote::before { content: '"'; font-size: 1.5rem; color: #ccecdb; line-height:0; vertical-align:-8px; margin-right:2px; }
+
+  /* Info / Feature Card */
+  .feature-card { background: #fff; border-radius: 16px; padding: 32px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align:center; }
+  .feature-card .icon { width: 56px; height: 56px; border-radius: 16px; background: #e8f7f0; display:flex; align-items:center; justify-content:center; margin: 0 auto 16px; }
+  .feature-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 8px; }
+  .feature-card p { font-size: 0.875rem; color: #757575; line-height: 1.6; }
+
+  /* Group Finder Card */
+  .group-card { background: #fff; border-radius: 16px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); display:flex; align-items:center; gap:16px; cursor:pointer; transition:all 200ms; }
+  .group-card:hover { box-shadow: 0 4px 14px rgba(0,138,78,0.2); }
+  .group-card .dot { width:10px; height:10px; border-radius:50%; background:#008a4e; flex-shrink:0; }
+  .group-card .info .venue { font-weight:700; font-size:1rem; }
+  .group-card .info .time { font-size:0.875rem; color:#757575; margin-top:2px; }
+  .group-card .info .dist { font-size:0.8rem; color:#9e9e9e; margin-top:2px; }
+  .group-card .chevron { margin-left:auto; color:#ccecdb; }
+</style>
+</head>
+<body>
+<h1>Cards</h1>
+<p class="subtitle">Card patterns for recipes, success stories, feature highlights, and group listings.</p>
+
+<div class="section-title">Recipe Cards</div>
+<div class="grid">
+  <div class="recipe-card">
+    <div class="img">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="white"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      <div class="badge">Free Food</div>
+      <div class="fav"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e02626" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+    </div>
+    <div class="body">
+      <div class="tag">Dinner · Syn Free</div>
+      <h3>Chicken &amp; Vegetable Stir-Fry</h3>
+      <p class="desc">A quick and tasty midweek dinner packed with colourful vegetables and lean protein.</p>
+      <div class="meta">
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 25 mins</span>
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Serves 4</span>
+        <span>0 Syns</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipe-card">
+    <div class="img" style="background:linear-gradient(135deg,#f08080 0%,#e02626 100%)">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="white"><path d="M3 2h18l-2 7H5L3 2zM5 9l-2 13h18L19 9"/></svg>
+      <div class="badge" style="background:#e02626">1.5 Syns</div>
+      <div class="fav"><svg width="14" height="14" viewBox="0 0 24 24" fill="#e02626" stroke="#e02626" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+    </div>
+    <div class="body">
+      <div class="tag" style="color:#e02626">Dessert · 1.5 Syns</div>
+      <h3>Strawberry &amp; Meringue Mess</h3>
+      <p class="desc">Light and indulgent — a creamy dessert that feels like a real treat without the guilt.</p>
+      <div class="meta">
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10 mins</span>
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Serves 2</span>
+        <span>1.5 Syns</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipe-card">
+    <div class="img" style="background:linear-gradient(135deg,#ddbf8b 0%,#997b50 100%)">
+      <svg width="80" height="80" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+    </div>
+    <div class="body">
+      <div class="tag">Breakfast · Syn Free</div>
+      <h3>Full English Fry-Up, Slimming World Style</h3>
+      <p class="desc">All the flavours of a classic fry-up without the extra fat — perfect for a weekend treat.</p>
+      <div class="meta">
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 20 mins</span>
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Serves 1</span>
+        <span>0 Syns</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Success Story Cards</div>
+<div class="grid-2">
+  <div class="story-card">
+    <div class="avatar">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="white"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="body">
+      <div class="name">Sarah M., Manchester</div>
+      <div class="loss">Lost 4st 7lbs</div>
+      <div class="quote">Slimming World changed my relationship with food completely. I eat more now than I ever did on other diets!</div>
+    </div>
+  </div>
+  <div class="story-card">
+    <div class="avatar" style="background:linear-gradient(135deg,#99d8b8 0%,#008a4e 100%)">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="white"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="body">
+      <div class="name">James T., Leeds</div>
+      <div class="loss">Lost 3st 2lbs</div>
+      <div class="quote">The group support made all the difference. Everyone cheers you on and no one judges you.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Feature Cards</div>
+<div class="grid">
+  <div class="feature-card">
+    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#008a4e" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <h3>Food Optimising</h3>
+    <p>Eat satisfying, filling food without counting calories. Our unique plan is built on real food you'll love.</p>
+  </div>
+  <div class="feature-card">
+    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#008a4e" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <h3>Group Support</h3>
+    <p>Join a warm, welcoming community where consultants and members cheer each other on every step.</p>
+  </div>
+  <div class="feature-card">
+    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#008a4e" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <h3>Body Magic</h3>
+    <p>Our activity programme meets you where you are — from sofa to 5K — and celebrates every step forward.</p>
+  </div>
+</div>
+
+<div class="section-title">Group Finder Cards</div>
+<div style="max-width:480px;display:flex;flex-direction:column;gap:8px;">
+  <div class="group-card">
+    <div class="dot"></div>
+    <div class="info">
+      <div class="venue">St Mary's Church Hall, Didsbury</div>
+      <div class="time">Tuesday 9:30am &amp; 5:30pm</div>
+      <div class="dist">0.4 miles away</div>
+    </div>
+    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+  <div class="group-card">
+    <div class="dot"></div>
+    <div class="info">
+      <div class="venue">Withington Community Centre</div>
+      <div class="time">Wednesday 7:00pm</div>
+      <div class="dist">1.1 miles away</div>
+    </div>
+    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+  <div class="group-card">
+    <div class="dot" style="background:#9e9e9e"></div>
+    <div class="info">
+      <div class="venue">Chorlton Leisure Centre</div>
+      <div class="time">Thursday 6:30pm</div>
+      <div class="dist">2.3 miles away</div>
+    </div>
+    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+</div>
+</body>
+</html>
