@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eating Out — Restaurant Syns by Region (Interactive) — Slimming World App</title>
+<title>Eating Out — Restaurant Syns by Cuisine (Interactive) — Slimming World App</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,14 +23,17 @@
   .appbar .back { color: #008a4e; font-weight: 800; font-size: 1.1rem; cursor: pointer; }
   .appbar .title { font-weight: 800; font-size: 1rem; }
 
-  /* Region chips */
-  .regions { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; flex-shrink: 0; scrollbar-width: none; }
-  .regions::-webkit-scrollbar { display: none; }
-  .region-chip { flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: #5c5c5c; background: #f2f2f2; border: 2px solid transparent; border-radius: 9999px; padding: 7px 14px; cursor: pointer; transition: all 200ms; font-family: 'Nunito Sans', sans-serif; }
-  .region-chip:hover { background: #e8f7f0; color: #006e3d; }
-  .region-chip.active { background: #008a4e; color: #fff; }
+  /* Cuisine category rail (Deliveroo-style: horizontal scroll, icon circle + label) */
+  .cuisines { display: flex; gap: 14px; overflow-x: auto; padding: 14px 16px 10px; flex-shrink: 0; scrollbar-width: none; }
+  .cuisines::-webkit-scrollbar { display: none; }
+  .cuisine { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; font-family: 'Nunito Sans', sans-serif; width: 58px; }
+  .cuisine .icon { width: 52px; height: 52px; border-radius: 50%; background: #f7f0e6; border: 2px solid transparent; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 200ms; }
+  .cuisine .clabel { font-size: 0.65rem; font-weight: 700; color: #5c5c5c; white-space: nowrap; transition: color 200ms; }
+  .cuisine:hover .icon { background: #e8f7f0; }
+  .cuisine.active .icon { background: #e8f7f0; border-color: #008a4e; box-shadow: 0 0 0 3px rgba(0,138,78,0.12); }
+  .cuisine.active .clabel { color: #006e3d; }
 
-  .hint { padding: 0 16px 8px; font-size: 0.7rem; color: #9e9e9e; flex-shrink: 0; }
+  .hint { padding: 2px 16px 8px; font-size: 0.7rem; color: #9e9e9e; flex-shrink: 0; border-bottom: 1px solid #f2f2f2; }
 
   .list { flex: 1; overflow-y: auto; }
   .rest-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #f7f7f7; }
@@ -50,10 +53,10 @@
 <body>
 
 <div class="docs">
-  <h1>Eating Out — Syns by Region</h1>
-  <p class="subtitle">Interactive prototype of the new "Plan a meal out" screen. Members pick a region and see popular restaurants there, each showing <strong>only its most common meal</strong> and that meal's Syn value — a fast answer to "what will this cost me?" before booking a table.</p>
+  <h1>Eating Out — Syns by Cuisine</h1>
+  <p class="subtitle">Interactive prototype of the new "Plan a meal out" screen. A Deliveroo-style horizontal category rail lets members browse by cuisine — Chinese, Thai, Korean, Greek, Italian, British, Caribbean and more. Each restaurant shows <strong>only its most common meal</strong> and that meal's Syn value — a fast answer to "what will this cost me?" before booking a table.</p>
   <ul>
-    <li><strong>Region chips</strong> — one tap filters the list; the member's home region is preselected.</li>
+    <li><strong>Cuisine rail</strong> — horizontally scrolling icon categories at a high level, like the Deliveroo food-group menu; one tap filters the restaurant list.</li>
     <li><strong>One meal per restaurant</strong> — the most commonly ordered dish only, keeping the list scannable.</li>
     <li><strong>Colour-coded Syn badges</strong> — green ≤ 5 Syns, amber 5.5–14.5, red 15+.</li>
   </ul>
@@ -64,7 +67,7 @@
 <div class="phone">
   <div class="statusbar"><span>9:41</span><span>●●●</span></div>
   <div class="appbar"><span class="back">‹</span><span class="title">Eating out</span></div>
-  <div class="regions" id="regions"></div>
+  <div class="cuisines" id="cuisines"></div>
   <div class="hint">Syn value shown for each restaurant's most common meal</div>
   <div class="list" id="restList"></div>
   <div class="footer-note">Values are for the standard menu item as served. Ask for sauces and dressings on the side to keep Syns down.</div>
@@ -73,61 +76,74 @@
 <script>
   // Illustrative data — production values come from the Slimming World food database.
   const DATA = {
-    'London & South East': [
-      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
-      { name: 'Wagamama', meal: 'Chicken katsu curry', syns: 20 },
+    'Chinese': { icon: '🥡', restaurants: [
+      { name: 'Chopstix', meal: 'Salt &amp; pepper chicken box', syns: 18 },
+      { name: 'Ping Pong', meal: 'Chicken dim sum platter', syns: 7 },
+      { name: 'Wok to Walk', meal: 'Chicken noodle box + teriyaki', syns: 9.5 },
+      { name: 'Tang\'s Kitchen', meal: 'Chicken chow mein', syns: 11 },
+      { name: 'Lotus House', meal: 'Sweet &amp; sour chicken + rice', syns: 16 },
+    ]},
+    'Thai': { icon: '🍜', restaurants: [
+      { name: 'Rosa\'s Thai', meal: 'Chicken pad thai', syns: 12.5 },
+      { name: 'Giggling Squid', meal: 'Thai green chicken curry + rice', syns: 14 },
+      { name: 'Busaba', meal: 'Chicken pad kra pao', syns: 8 },
+      { name: 'Thaikhun', meal: 'Tom yum chicken soup', syns: 3.5 },
+    ]},
+    'Korean': { icon: '🍲', restaurants: [
+      { name: 'Kimchee', meal: 'Chicken bibimbap', syns: 6.5 },
+      { name: 'Yori', meal: 'Korean fried chicken', syns: 17 },
+      { name: 'On The Bab', meal: 'Beef bulgogi + rice', syns: 5.5 },
+      { name: 'Bunsik', meal: 'Original Korean corn dog', syns: 19 },
+    ]},
+    'Greek': { icon: '🥙', restaurants: [
+      { name: 'The Real Greek', meal: 'Chicken souvlaki wrap', syns: 8.5 },
+      { name: 'The Athenian', meal: 'Chicken gyros wrap', syns: 9 },
+      { name: 'Santorini Grill', meal: 'Grilled chicken skewers + Greek salad', syns: 2 },
+      { name: 'Zorba\'s', meal: 'Halloumi wrap', syns: 13 },
+    ]},
+    'Italian': { icon: '🍝', restaurants: [
       { name: 'Pizza Express', meal: 'Margherita classic', syns: 22 },
-      { name: 'Wetherspoon', meal: 'Chicken tikka masala + rice', syns: 8 },
-      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
-      { name: 'Itsu', meal: "Chicken teriyaki rice bowl", syns: 4.5 },
-    ],
-    'Midlands': [
-      { name: 'Toby Carvery', meal: 'Roast turkey carvery (no pudding)', syns: 4.5 },
-      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
-      { name: 'Bella Italia', meal: 'Spaghetti pomodoro', syns: 12 },
-      { name: 'Wetherspoon', meal: 'Mixed grill + jacket potato', syns: 9 },
-      { name: 'TGI Fridays', meal: 'Cajun-spiced chicken breast', syns: 6.5 },
-    ],
-    'North West': [
-      { name: 'Harvester', meal: 'Original combo + corn on the cob', syns: 11 },
-      { name: 'Frankie & Benny\'s', meal: 'Grilled chicken burger + fries', syns: 15 },
-      { name: 'Wetherspoon', meal: 'Fish &amp; chips', syns: 25 },
-      { name: "Nando's", meal: '½ Peri-Peri chicken + spicy rice', syns: 3 },
       { name: 'Zizzi', meal: 'Pollo prosciutto', syns: 14 },
-    ],
-    'North East & Yorkshire': [
-      { name: 'Toby Carvery', meal: 'Roast beef carvery + veg', syns: 5 },
-      { name: 'Wetherspoon', meal: 'Gammon, egg &amp; chips', syns: 13 },
+      { name: 'Bella Italia', meal: 'Spaghetti pomodoro', syns: 12 },
+      { name: 'Prezzo', meal: 'Spaghetti bolognese', syns: 10.5 },
+      { name: 'Vapiano', meal: 'Pasta arrabbiata', syns: 9 },
+    ]},
+    'British': { icon: '🥧', restaurants: [
+      { name: 'Toby Carvery', meal: 'Roast turkey carvery (no pudding)', syns: 4.5 },
+      { name: 'Wetherspoon', meal: 'Fish &amp; chips', syns: 25 },
+      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
       { name: 'Greggs', meal: 'Chicken bake', syns: 12 },
       { name: 'Beefeater', meal: 'Sirloin steak + jacket potato', syns: 3.5 },
-      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
-    ],
-    'South West & Wales': [
-      { name: 'Brewers Fayre', meal: 'Chicken tikka masala + rice', syns: 8.5 },
-      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
-      { name: 'Pizza Express', meal: 'Leggera Padana (under 600 kcal)', syns: 12 },
-      { name: 'Toby Carvery', meal: 'Roast gammon carvery', syns: 5.5 },
-      { name: 'Wetherspoon', meal: 'Katsu chicken curry', syns: 17 },
-    ],
-    'Scotland': [
-      { name: 'Wetherspoon', meal: 'Scottish breakfast', syns: 16 },
-      { name: "Nando's", meal: '½ Peri-Peri chicken + corn', syns: 2.5 },
-      { name: 'Bella Italia', meal: 'Pollo pesto pasta', syns: 18 },
-      { name: 'Harvester', meal: 'Rotisserie chicken + salad bar', syns: 2 },
-      { name: 'TGI Fridays', meal: 'Sesame chicken strips', syns: 19 },
-    ],
-    'Northern Ireland': [
-      { name: 'Wetherspoon', meal: 'Ulster fry breakfast', syns: 21 },
-      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
-      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
-      { name: 'Frankie & Benny\'s', meal: 'Spaghetti bolognese', syns: 10 },
-      { name: 'Zizzi', meal: 'Margherita rustica', syns: 23 },
-    ],
+    ]},
+    'Caribbean': { icon: '🌴', restaurants: [
+      { name: 'Turtle Bay', meal: 'Jerk chicken + rice &amp; peas', syns: 7.5 },
+      { name: 'Rum Kitchen', meal: 'Curry goat + rice', syns: 10 },
+      { name: 'Island Grill', meal: 'Jerk chicken wrap', syns: 8 },
+      { name: 'Mama\'s Jerk', meal: 'Jerk chicken box + plantain', syns: 11.5 },
+    ]},
+    'Indian': { icon: '🍛', restaurants: [
+      { name: 'Dishoom', meal: 'Chicken ruby curry + rice', syns: 12 },
+      { name: 'Mowgli', meal: 'Butter chicken + roti', syns: 15 },
+      { name: 'Tamatanga', meal: 'Chicken tikka masala + rice', syns: 13.5 },
+      { name: 'Bundobust', meal: 'Tarka dhal + rice', syns: 4 },
+    ]},
+    'Japanese': { icon: '🍣', restaurants: [
+      { name: 'YO! Sushi', meal: 'Salmon nigiri set', syns: 5 },
+      { name: 'Itsu', meal: 'Chicken teriyaki rice bowl', syns: 4.5 },
+      { name: 'Wagamama', meal: 'Chicken katsu curry', syns: 20 },
+      { name: 'Sushi Daily', meal: 'California roll box', syns: 6 },
+    ]},
+    'Mexican': { icon: '🌮', restaurants: [
+      { name: 'Wahaca', meal: 'Grilled chicken tacos', syns: 8 },
+      { name: 'Tortilla', meal: 'Chicken burrito', syns: 15.5 },
+      { name: 'Barburrito', meal: 'Naked burrito bowl (chicken)', syns: 5.5 },
+      { name: 'Chiquito', meal: 'Chicken fajitas', syns: 9.5 },
+    ]},
   };
 
-  const regionsEl = document.getElementById('regions');
+  const cuisinesEl = document.getElementById('cuisines');
   const listEl = document.getElementById('restList');
-  let active = 'London & South East';
+  let active = 'Chinese';
 
   function badgeClass(syns) {
     if (syns <= 5) return 'badge-low';
@@ -139,20 +155,25 @@
     return name.split(/\s+/).map(w => w[0]).join('').replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase();
   }
 
-  function renderRegions() {
-    regionsEl.innerHTML = '';
-    Object.keys(DATA).forEach(region => {
-      const chip = document.createElement('button');
-      chip.className = 'region-chip' + (region === active ? ' active' : '');
-      chip.textContent = region;
-      chip.addEventListener('click', () => { active = region; renderRegions(); renderList(); });
-      regionsEl.appendChild(chip);
+  function renderCuisines() {
+    cuisinesEl.innerHTML = '';
+    Object.entries(DATA).forEach(([cuisine, { icon }]) => {
+      const btn = document.createElement('button');
+      btn.className = 'cuisine' + (cuisine === active ? ' active' : '');
+      btn.innerHTML = `<span class="icon">${icon}</span><span class="clabel">${cuisine}</span>`;
+      btn.addEventListener('click', () => {
+        active = cuisine;
+        renderCuisines();
+        renderList();
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+      cuisinesEl.appendChild(btn);
     });
   }
 
   function renderList() {
     listEl.innerHTML = '';
-    DATA[active].forEach(r => {
+    DATA[active].restaurants.forEach(r => {
       const row = document.createElement('div');
       row.className = 'rest-row';
       const synText = (r.syns % 1 ? r.syns.toFixed(1) : r.syns) + ' Syn' + (r.syns === 1 ? '' : 's');
@@ -167,7 +188,7 @@
     });
   }
 
-  renderRegions();
+  renderCuisines();
   renderList();
 </script>
 
