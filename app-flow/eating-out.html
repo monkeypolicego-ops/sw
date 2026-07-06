@@ -1,0 +1,175 @@
+<!-- @dsCard group="App Flows" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eating Out — Restaurant Syns by Region (Interactive) — Slimming World App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', sans-serif; background: #fdfaf5; color: #1a1a1a; padding: 40px; display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-start; }
+  .docs { max-width: 460px; }
+  h1 { font-size: 1.75rem; font-weight: 700; color: #006e3d; margin-bottom: 8px; }
+  .subtitle { color: #757575; margin-bottom: 24px; line-height: 1.6; }
+  .docs ul { margin: 0 0 24px 18px; color: #444; font-size: 0.9rem; line-height: 1.8; }
+  .docs a { color: #008a4e; font-weight: 700; }
+  .disclaimer { font-size: 0.75rem; color: #9e9e9e; line-height: 1.5; }
+
+  /* Phone frame */
+  .phone { width: 340px; height: 640px; background: #fff; border: 8px solid #1a1a1a; border-radius: 36px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.18); flex-shrink: 0; }
+  .statusbar { height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 0.7rem; font-weight: 700; color: #444; flex-shrink: 0; }
+  .appbar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; flex-shrink: 0; border-bottom: 1px solid #f2f2f2; }
+  .appbar .back { color: #008a4e; font-weight: 800; font-size: 1.1rem; cursor: pointer; }
+  .appbar .title { font-weight: 800; font-size: 1rem; }
+
+  /* Region chips */
+  .regions { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; flex-shrink: 0; scrollbar-width: none; }
+  .regions::-webkit-scrollbar { display: none; }
+  .region-chip { flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: #5c5c5c; background: #f2f2f2; border: 2px solid transparent; border-radius: 9999px; padding: 7px 14px; cursor: pointer; transition: all 200ms; font-family: 'Nunito Sans', sans-serif; }
+  .region-chip:hover { background: #e8f7f0; color: #006e3d; }
+  .region-chip.active { background: #008a4e; color: #fff; }
+
+  .hint { padding: 0 16px 8px; font-size: 0.7rem; color: #9e9e9e; flex-shrink: 0; }
+
+  .list { flex: 1; overflow-y: auto; }
+  .rest-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #f7f7f7; }
+  .rest-row .logo { width: 38px; height: 38px; border-radius: 10px; background: #e8f7f0; color: #006e3d; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; flex-shrink: 0; }
+  .rest-row .info { flex: 1; min-width: 0; }
+  .rest-row .rname { font-weight: 800; font-size: 0.85rem; }
+  .rest-row .meal { font-size: 0.72rem; color: #757575; margin-top: 1px; }
+  .rest-row .meal .most { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9e9e9e; display: block; margin-bottom: 1px; }
+  .badge { font-size: 0.72rem; font-weight: 700; padding: 4px 11px; border-radius: 9999px; white-space: nowrap; flex-shrink: 0; }
+  .badge-low { background: #e8f7f0; color: #006e3d; }
+  .badge-mid { background: #fef8ec; color: #b87708; }
+  .badge-high { background: #fdf0f0; color: #b81a1a; }
+
+  .footer-note { flex-shrink: 0; border-top: 1px solid #e0e0e0; background: #fff; padding: 10px 16px 16px; font-size: 0.65rem; color: #9e9e9e; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="docs">
+  <h1>Eating Out — Syns by Region</h1>
+  <p class="subtitle">Interactive prototype of the new "Plan a meal out" screen. Members pick a region and see popular restaurants there, each showing <strong>only its most common meal</strong> and that meal's Syn value — a fast answer to "what will this cost me?" before booking a table.</p>
+  <ul>
+    <li><strong>Region chips</strong> — one tap filters the list; the member's home region is preselected.</li>
+    <li><strong>One meal per restaurant</strong> — the most commonly ordered dish only, keeping the list scannable.</li>
+    <li><strong>Colour-coded Syn badges</strong> — green ≤ 5 Syns, amber 5.5–14.5, red 15+.</li>
+  </ul>
+  <p style="font-size:0.85rem;color:#757575;margin-bottom:16px;">Part of the <a href="index.html">adjusted meal logging flow</a> · See also the <a href="planning-screen.html">multi-select Planning screen</a>.</p>
+  <p class="disclaimer">Restaurants and Syn values are illustrative placeholders for prototyping. Production data must come from the official Slimming World food database, with "most common meal" driven by order-frequency data per chain.</p>
+</div>
+
+<div class="phone">
+  <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+  <div class="appbar"><span class="back">‹</span><span class="title">Eating out</span></div>
+  <div class="regions" id="regions"></div>
+  <div class="hint">Syn value shown for each restaurant's most common meal</div>
+  <div class="list" id="restList"></div>
+  <div class="footer-note">Values are for the standard menu item as served. Ask for sauces and dressings on the side to keep Syns down.</div>
+</div>
+
+<script>
+  // Illustrative data — production values come from the Slimming World food database.
+  const DATA = {
+    'London & South East': [
+      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
+      { name: 'Wagamama', meal: 'Chicken katsu curry', syns: 20 },
+      { name: 'Pizza Express', meal: 'Margherita classic', syns: 22 },
+      { name: 'Wetherspoon', meal: 'Chicken tikka masala + rice', syns: 8 },
+      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
+      { name: 'Itsu', meal: "Chicken teriyaki rice bowl", syns: 4.5 },
+    ],
+    'Midlands': [
+      { name: 'Toby Carvery', meal: 'Roast turkey carvery (no pudding)', syns: 4.5 },
+      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
+      { name: 'Bella Italia', meal: 'Spaghetti pomodoro', syns: 12 },
+      { name: 'Wetherspoon', meal: 'Mixed grill + jacket potato', syns: 9 },
+      { name: 'TGI Fridays', meal: 'Cajun-spiced chicken breast', syns: 6.5 },
+    ],
+    'North West': [
+      { name: 'Harvester', meal: 'Original combo + corn on the cob', syns: 11 },
+      { name: 'Frankie & Benny\'s', meal: 'Grilled chicken burger + fries', syns: 15 },
+      { name: 'Wetherspoon', meal: 'Fish &amp; chips', syns: 25 },
+      { name: "Nando's", meal: '½ Peri-Peri chicken + spicy rice', syns: 3 },
+      { name: 'Zizzi', meal: 'Pollo prosciutto', syns: 14 },
+    ],
+    'North East & Yorkshire': [
+      { name: 'Toby Carvery', meal: 'Roast beef carvery + veg', syns: 5 },
+      { name: 'Wetherspoon', meal: 'Gammon, egg &amp; chips', syns: 13 },
+      { name: 'Greggs', meal: 'Chicken bake', syns: 12 },
+      { name: 'Beefeater', meal: 'Sirloin steak + jacket potato', syns: 3.5 },
+      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
+    ],
+    'South West & Wales': [
+      { name: 'Brewers Fayre', meal: 'Chicken tikka masala + rice', syns: 8.5 },
+      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
+      { name: 'Pizza Express', meal: 'Leggera Padana (under 600 kcal)', syns: 12 },
+      { name: 'Toby Carvery', meal: 'Roast gammon carvery', syns: 5.5 },
+      { name: 'Wetherspoon', meal: 'Katsu chicken curry', syns: 17 },
+    ],
+    'Scotland': [
+      { name: 'Wetherspoon', meal: 'Scottish breakfast', syns: 16 },
+      { name: "Nando's", meal: '½ Peri-Peri chicken + corn', syns: 2.5 },
+      { name: 'Bella Italia', meal: 'Pollo pesto pasta', syns: 18 },
+      { name: 'Harvester', meal: 'Rotisserie chicken + salad bar', syns: 2 },
+      { name: 'TGI Fridays', meal: 'Sesame chicken strips', syns: 19 },
+    ],
+    'Northern Ireland': [
+      { name: 'Wetherspoon', meal: 'Ulster fry breakfast', syns: 21 },
+      { name: "Nando's", meal: '¼ Peri-Peri chicken (no skin) + corn', syns: 1 },
+      { name: 'Harvester', meal: 'Simply chicken + unlimited salad', syns: 2 },
+      { name: 'Frankie & Benny\'s', meal: 'Spaghetti bolognese', syns: 10 },
+      { name: 'Zizzi', meal: 'Margherita rustica', syns: 23 },
+    ],
+  };
+
+  const regionsEl = document.getElementById('regions');
+  const listEl = document.getElementById('restList');
+  let active = 'London & South East';
+
+  function badgeClass(syns) {
+    if (syns <= 5) return 'badge-low';
+    if (syns < 15) return 'badge-mid';
+    return 'badge-high';
+  }
+
+  function initials(name) {
+    return name.split(/\s+/).map(w => w[0]).join('').replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase();
+  }
+
+  function renderRegions() {
+    regionsEl.innerHTML = '';
+    Object.keys(DATA).forEach(region => {
+      const chip = document.createElement('button');
+      chip.className = 'region-chip' + (region === active ? ' active' : '');
+      chip.textContent = region;
+      chip.addEventListener('click', () => { active = region; renderRegions(); renderList(); });
+      regionsEl.appendChild(chip);
+    });
+  }
+
+  function renderList() {
+    listEl.innerHTML = '';
+    DATA[active].forEach(r => {
+      const row = document.createElement('div');
+      row.className = 'rest-row';
+      const synText = (r.syns % 1 ? r.syns.toFixed(1) : r.syns) + ' Syn' + (r.syns === 1 ? '' : 's');
+      row.innerHTML = `
+        <div class="logo">${initials(r.name)}</div>
+        <div class="info">
+          <div class="rname">${r.name}</div>
+          <div class="meal"><span class="most">Most common meal</span>${r.meal}</div>
+        </div>
+        <span class="badge ${badgeClass(r.syns)}">${synText}</span>`;
+      listEl.appendChild(row);
+    });
+  }
+
+  renderRegions();
+  renderList();
+</script>
+
+</body>
+</html>
